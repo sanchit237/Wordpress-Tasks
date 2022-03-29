@@ -786,3 +786,22 @@ function twentytwenty_get_elements_array() {
 	 */
 	return apply_filters( 'twentytwenty_get_elements_array', $elements );
 }
+
+
+add_action( 'wp_footer', 'load_more_functionality');
+
+function load_more_functionality(){
+
+	?>
+	<script>
+		jQuery(document).ready(function(){
+			$ = jQuery;
+			$("a#load-more").on("click",function(e){
+				e.preventDefault();
+				console.log("hello");
+			});
+		});
+	</script>
+
+	<?php
+}

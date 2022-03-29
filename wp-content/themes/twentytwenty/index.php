@@ -111,9 +111,12 @@ get_header();
 
 	<?php get_template_part( 'template-parts/pagination' ); ?>
 
+	<div class="load-imp" style="display: flex;justify-content: center;padding: 20px;">
+		<a id="load-more" href="#" style="padding: 12px;border: 1px solid black;border-radius: 20px;font-size: 16px;">Load more</a>
+	</div>
 </main><!-- #site-content -->
 
-<?php get_template_part( 'template-parts/footer-menus-widgets' ); ?>
+<?php /*get_template_part( 'template-parts/footer-menus-widgets' ); */ ?>
 
 <?php
 get_footer();
