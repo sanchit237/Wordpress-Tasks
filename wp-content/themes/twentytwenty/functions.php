@@ -791,14 +791,28 @@ function twentytwenty_get_elements_array() {
 add_action( 'wp_footer', 'load_more_functionality');
 
 function load_more_functionality(){
-
+		$website_url = get_site_url();
 	?>
 	<script>
-		jQuery(document).ready(function(){
+		jQuery(document).ready(function($){
 			$ = jQuery;
-			$("a#load-more").on("click",function(e){
+			$(".load-imp a#load-more").on("click",function(e){
 				e.preventDefault();
-				console.log("hello");
+				var website_url = '<?php echo $website_url?>';
+				var pagenum = $(".load-imp a#load-more").attr("data-pagenum");
+				var maximum_pages = $(".load-imp a#load-more").attr("data-maxpages");
+				var current_pagenum = parseInt(pagenum)+1;
+				var trigger_url = website_url + '/page/' + current_pagenum + '/';
+
+				$.get(trigger_url, function(data, status){
+					var main_content = $(data).find('article');
+					$("main#site-content").append(main_content);
+					$(".load-imp a#load-more").attr("data-pagenum", current_pagenum);
+					if ( current_pagenum == maximum_pages){
+						$(".load-imp a#load-more").css("display","none");
+						$(".load-imp p").css("display","block");
+					}
+				});
 			});
 		});
 	</script>

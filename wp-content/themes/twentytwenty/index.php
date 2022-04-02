@@ -109,12 +109,19 @@ get_header();
 	}
 	?>
 
-	<?php get_template_part( 'template-parts/pagination' ); ?>
+	<?php/* get_template_part( 'template-parts/pagination' );*/ ?>
 
-	<div class="load-imp" style="display: flex;justify-content: center;padding: 20px;">
-		<a id="load-more" href="#" style="padding: 12px;border: 1px solid black;border-radius: 20px;font-size: 16px;">Load more</a>
-	</div>
 </main><!-- #site-content -->
+
+<?php 
+	$max_pages = $wp_query->max_num_pages;
+	// echo $max_pages;
+?>
+
+<div class="load-imp" style="display: flex;justify-content: center;padding: 20px;">
+	<a id="load-more" href="#" data-pagenum="1" data-maxpages='<?php echo $max_pages;?>'  style="padding: 12px;border: 1px solid black;border-radius: 20px;font-size: 16px;text-decoration:none;">Load more</a>
+	<p style="display:none;">No more posts available</p>
+</div>
 
 <?php /*get_template_part( 'template-parts/footer-menus-widgets' ); */ ?>
 
