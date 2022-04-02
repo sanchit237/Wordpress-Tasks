@@ -125,5 +125,37 @@ get_header();
 
 <?php /*get_template_part( 'template-parts/footer-menus-widgets' ); */ ?>
 
+<?php 
+
+//Displaying the custom post type services on homepage using wp query START
+$args = array(
+	'post_type' => 'Services',
+	'post_status' => 'publish',
+	'posts_per_page' => 6
+);
+
+$services_query = new WP_Query( $args );
+
+if ( $services_query->have_posts() ) : ?>
+
+<div>
+	<h2 style="text-align:center;">SERVICES</h2>
+	<div style="display: flex;justify-content: space-evenly;">
+	<?php while( $services_query->have_posts() ) : $services_query->the_post(); ?>
+		<div style="border:1px solid black;padding: 20px 10px; text-align:center;">
+			<h4><?php the_title(); ?></h4>
+			<h5><?php the_content(); ?></h5>
+			<?php if ( has_post_thumbnail() ) : ?>
+				<a href="<?php the_permalink(); ?>"><?php the_post_thumbnail('medium'); ?></a>
+			<?php endif; ?>	
+		</div>
+	<?php endwhile; ?>
+</div>
+</div>
+<?php endif; 
+
+//Displaying the custom post type services on homepage using wp query END
+?>
+
 <?php
 get_footer();
