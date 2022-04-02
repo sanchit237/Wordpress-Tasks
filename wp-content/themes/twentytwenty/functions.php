@@ -877,3 +877,25 @@ function services_post_creation(){
 	);
 	register_post_type( 'Services', $args );
 }
+
+
+//Adding new manager role for user registartion START
+
+add_action( 'init', 'manager_role_addition' );
+
+function manager_role_addition(){
+	add_role('Manager','Manager');
+}
+//Adding new manager role for user registartion END
+
+
+//Remove the posts column from users registration and add new mobile column START
+add_filter('manage_users_columns', 'users_column_modification');
+
+function users_column_modification($columns){
+	unset($columns['posts']);
+	$columns['mobile'] = 'Mobile';
+	return $columns;
+}
+
+//Remove the posts column from users registration and add new mobile column END
